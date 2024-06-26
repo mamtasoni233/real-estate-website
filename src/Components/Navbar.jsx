@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../index.css';
+import axios from 'axios';
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
+  const API_BASE_URL = 'http://127.0.0.1:57173/';
   const handleMenuClick = () => {
     setShowMenu(!showMenu);
   };
 
   useEffect(() => {
+    if (localStorage.getItem('token') === "" || localStorage.getItem('token') === null) {
+      navigate("/");
+    }
     const handleScroll = () => {
       if (window.scrollY >= 33) {
         setIsScrolled(true);
@@ -23,12 +29,35 @@ const Navbar = () => {
     };
   }, []);
 
+  /* const getUser = () => {
+    axios.get(API_BASE_URL + 'user', { headers: { Authorization: 'Bearer ' + localStorage.getItem('token') } })
+      .then((r) => {
+        setUser(r.data)
+      })
+      .catch((e) => {
+        console.log(e)
+      });
+  } */
+
+  const logoutAction = () => {
+    console.log('logout api');
+    axios.delete(API_BASE_URL + 'logOut')
+      .then((r) => {
+        // localStorage.setItem('token', "")
+        localStorage.removeItem('token');
+        navigate("/");
+      })
+      .catch((e) => {
+        console.log(e)
+      });
+  }
+
   return (
     <div
       className={`fixed top-0 z-50 w-full h-[70px] flex justify-between items-center px-4  text-black ${isScrolled ? 'bg-white' : 'bg-transparent'}`}
     >
       <div className="text-4xl cursor-pointer inline-flex items-center text-amber-800" >
-        <Link to="/">
+        <Link to="/home">
           Real Estate
         </Link>
       </div>
@@ -63,7 +92,7 @@ const Navbar = () => {
       </div>
       <ul className="hidden md:flex">
         <li>
-          <Link to="/">
+          <Link to="/home">
             Home
           </Link>
         </li>
@@ -85,8 +114,8 @@ const Navbar = () => {
       </ul>
       <div className="hidden md:flex">
         <button className="px-4 py-2 bg-amber-800 text-white rounded-md hover:bg-amber-900 hover:text-white mx-2">
-          <Link to="contact">
-            Contact Us
+          <Link to="/">
+            Logout
           </Link>
         </button>
       </div>
@@ -120,11 +149,11 @@ const Navbar = () => {
           On Sale
         </Link>
         <Link
-          to="/contact"
+          to="/"
           className="p-4 hover:bg-gray-700 cursor-pointer"
-          onClick={handleMenuClick}
+          onClick={logoutAction}
         >
-          Contact Us
+          Logout
         </Link>
       </div>
     </div>

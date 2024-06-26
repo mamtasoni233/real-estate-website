@@ -81,13 +81,13 @@ function App() {
               element={<Register />}
               activeclassname="active"
             />
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="*" element={<Page404 />} />
           </Route>
 
           {/* Main Layout Routes */}
           <Route element={<MainLayout />}>
-            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/about-us" element={<About />} />
             <Route path="/features" element={<Features />} />
             <Route path="/sales" element={<Sales />} />

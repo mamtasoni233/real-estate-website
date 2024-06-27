@@ -32,44 +32,7 @@ const AuthLayout = () => {
     </>
   );
 };
-/* let AllRoutes = createBrowserRouter([
-  {
-    element: <AuthLayout />,
-    children: [
-      {
-        path: '/login',
-        element: <Login />,
-      },
-    ],
-  },
-  {
-    element: <MainLayout />,
-    children: [
-      {
-        path: '/',
-        element: <Home />,
-      },
-      {
-        path: '/about-us',
-        element: <About />,
-      },
-      {
-        path: '/features',
-        element: <Features />,
-      },
-      {
-        path: '/sales',
-        element: <Sales />,
-      },
-      {
-        path: '*',
-        element: <Page404 />,
-      },
-    ],
-  },
-]); */
 function App() {
-  /*  return <RouterProvider router={AllRoutes} />; */
   return (
     <>
       <Router>

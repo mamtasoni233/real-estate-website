@@ -1,19 +1,14 @@
 import Navbar from './Components/Navbar';
-import Footer from './Components/Footer';
-import Home from './Components/Home';
-import Features from './Components/Feature';
-import Sales from './Components/Onsale';
-import About from './Components/About';
-import Page404 from './Components/Page404';
+import Footer from './Pages/Footer';
+import Home from './Pages/Home';
+import Features from './Pages/Feature';
+import Sales from './Pages/Onsale';
+import About from './Pages/About';
+import Page404 from './Pages/Page404';
 
 import './index.css';
 // import { RouterProvider, createBrowserRouter, Outlet } from 'react-router-dom';
-import {
-  Outlet,
-  Route,
-  BrowserRouter as Router,
-  Routes,
-} from 'react-router-dom';
+import { Outlet, Route, BrowserRouter, Routes } from 'react-router-dom';
 import Login from './Components/Login';
 import Register from './Components/Register';
 
@@ -35,7 +30,7 @@ const AuthLayout = () => {
 function App() {
   return (
     <>
-      <Router>
+      <BrowserRouter>
         <Routes>
           {/* Auth Layout Routes */}
           <Route element={<AuthLayout />}>
@@ -56,7 +51,7 @@ function App() {
             <Route path="/sales" element={<Sales />} />
           </Route>
         </Routes>
-      </Router>
+      </BrowserRouter>
     </>
   );
 }

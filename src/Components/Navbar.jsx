@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Router, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../index.css';
-import axios from 'axios';
+// import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [user, setUser] = useState({})
+  // const [user, setUser] = useState({})
   const navigate = useNavigate();
-  const API_BASE_URL = 'http://192.168.3.190:63181/';
+  // const API_BASE_URL = 'http://192.168.3.190:63181/';
   const handleMenuClick = () => {
     setShowMenu(!showMenu);
   };
@@ -17,8 +17,6 @@ const Navbar = () => {
   useEffect(() => {
     if (localStorage.getItem('token') === "" || localStorage.getItem('token') === null) {
       navigate("/");
-    } else {
-      getUser();
     }
   });
   useEffect(() => {
@@ -35,30 +33,27 @@ const Navbar = () => {
     };
   }, []);
 
-  const getUser = () => {
-    /* axios.get(API_BASE_URL + 'Login/getUserById', { headers: { Authorization: 'Bearer ' + localStorage.getItem('token') } })
-      .then((r) => {
-        setUser(r.data);
-        console.log(user)
-        // toast.success("Welcome" + { r.data.name });
-      })
-      .catch((e) => {
-        console.log(e)
-      }); */
-    let userData = localStorage.getItem('user');
-    setUser(userData);
-  }
+  /*  const getUser = () => {
+     let userData = localStorage.getItem('user');
+     setUser(userData);
+   } */
   const logoutAction = () => {
     console.log('logout api');
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    let uData = localStorage.getItem('token');
-    if (!uData) {
-      toast.error("Please log in to access further.....");
-      Router.push('/');
-      // navigate("/");
-      return;
-    }
+    // localStorage.removeItem('welcomed');
+    navigate("/");
+    /*   if (!localStorage.getItem('welcomed')) {
+        toast.error('Please log in to access further.....');
+      } */
+
+    // let uData = localStorage.getItem('token');
+    /*  if (!uData) {
+       toast.error("Please log in to access further.....");
+       // Router.push('/');
+       navigate("/");
+       return;
+     } */
     // axios.delete(API_BASE_URL + 'Auth/logout')
     //   .then((r) => {
     //     localStorage.removeItem('token');
@@ -72,7 +67,6 @@ const Navbar = () => {
 
   return (
     <>
-      <ToastContainer />
       <div
         className={`fixed top-0 z-50 w-full h-[70px] flex justify-between items-center px-4  text-black ${isScrolled ? 'bg-white' : 'bg-transparent'}`}
       >

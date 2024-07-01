@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+// import { ToastContainer, toast } from 'react-toastify';
 
 export default function Login() {
     const navigate = useNavigate();
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [validationErrors, setValidationErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const API_BASE_URL = 'http://192.168.3.190:63181/';
@@ -17,9 +17,9 @@ export default function Login() {
         }
     })
     const loginAction = (e) => {
-        setValidationErrors({})
         e.preventDefault();
-        setIsSubmitting(true)
+        setValidationErrors({});
+        setIsSubmitting(true);
         let payload = {
             email: email,
             password: password,
@@ -28,10 +28,12 @@ export default function Login() {
             .then((r) => {
                 console.log(r)
                 setIsSubmitting(false)
-                localStorage.setItem('token', r.data.data.oUser.api_token);
-                localStorage.setItem('user', JSON.stringify(r.data.data.oUser));
+                // localStorage.setItem('token', r.data.data.oUser.api_token);
+                // localStorage.setItem('user', JSON.stringify(r.data.data.oUser));
+                localStorage.setItem('showWelcomeToast', 'true'); // Set the flag to true
                 navigate("/home");
-                toast.success('Welcome' + r.data.data.oUser.name);
+                // toast.success('Welcome' + r.data.data.oUser.name);
+
                 // Router.push('/home');
             })
             .catch((e) => {
@@ -46,9 +48,9 @@ export default function Login() {
             });
 
     }
+
     return (
         <>
-            <ToastContainer />
             <div className="flex items-center justify-center h-screen w-full px-5 sm:px-0">
                 <div className="flex bg-white rounded-lg shadow-lg border overflow-hidden max-w-sm lg:max-w-4xl w-full">
                     <div

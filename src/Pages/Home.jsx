@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
 const HomePage = () => {
   const [user, setUser] = useState({});
-  useEffect(() => {
-    if (localStorage.getItem('token') === "" || localStorage.getItem('token') === null) {
-      Navigate("/");
-    } else {
-      getUser();
-    }
-  });
+  // let location = useLocation();
 
   const getUser = () => {
-    let userData = localStorage.getItem('user');
+    let userData = JSON.parse(localStorage.getItem('user'));
     setUser(userData);
-    console.log(user);
-    toast.success('Welcome ' + user.name);
+    console.log(userData);
 
-  }
+    // Check if the welcome message should be shown
+    if (userData && localStorage.getItem('showWelcomeToast') === 'true') {
+      toast.success('Welcome ' + userData.name);
+      localStorage.setItem('showWelcomeToast', 'false'); // Set the flag to false
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
   return (
     <>
       <ToastContainer />
+
       <div
         id="home"
         className="w-full min-h-screen p-8 flex items-center bg-gradient-to-b from-white to-gray-400"

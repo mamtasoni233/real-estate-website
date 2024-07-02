@@ -119,3 +119,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ## axois
 
 --- npm i axios
+
+## smooth scroll
+
+--- npm install -D tailwindcss react-scroll

@@ -9,7 +9,8 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [validationErrors, setValidationErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const API_BASE_URL = 'http://192.168.3.190:63181/';
+    // const API_BASE_URL = 'http://192.168.3.190:63181/';
+    const API_BASE_URL = 'http://127.0.0.1:59236/';
 
     useEffect(() => {
         if (localStorage.getItem('token') !== "" && localStorage.getItem('token') != null) {
@@ -28,10 +29,11 @@ export default function Login() {
             .then((r) => {
                 console.log(r)
                 setIsSubmitting(false)
-                // localStorage.setItem('token', r.data.data.oUser.api_token);
-                // localStorage.setItem('user', JSON.stringify(r.data.data.oUser));
+                localStorage.setItem('token', r.data.data.oUser.api_token);
+                localStorage.setItem('user', JSON.stringify(r.data.data.oUser));
                 localStorage.setItem('showWelcomeToast', 'true'); // Set the flag to true
                 navigate("/home");
+
                 // toast.success('Welcome' + r.data.data.oUser.name);
 
                 // Router.push('/home');

@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 // import { ToastContainer, toast } from 'react-toastify';
@@ -10,7 +10,8 @@ export default function Register() {
     // const [password, setPassword] = useState("");
     // const [confirmPassword, setName] = useState("");
     // const [name, setConfirmPassword] = useState("");
-    const API_BASE_URL = 'http://192.168.3.190:63181/';
+    // const API_BASE_URL = 'http://192.168.3.190:63181/';
+    const API_BASE_URL = 'http://127.0.0.1:59236/';
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
